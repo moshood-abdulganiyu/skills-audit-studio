@@ -58,15 +58,15 @@ def generate(n_jobs=1500, n_cands=4000, seed=7):
         r = rng.choice(roles)
         core, opt, mexp, medu = ROLES[r]
         jobs.append(
-            dict(
-                job_id=f"J{j:04d}",
-                title=r,
-                core_skills=list(core),
-                optional_skills=list(rng.choice(opt, size=rng.integers(1, len(opt) + 1), replace=False)),
-                min_experience=int(max(0, mexp + rng.integers(-1, 2))),
-                min_education=medu,
-                state="Remote" if rng.random() < 0.12 else str(rng.choice(STATES)),
-            )
+            {
+                "job_id": f"J{j:04d}",
+                "title": r,
+                "core_skills": list(core),
+                "optional_skills": list(rng.choice(opt, size=rng.integers(1, len(opt) + 1), replace=False)),
+                "min_experience": int(max(0, mexp + rng.integers(-1, 2))),
+                "min_education": medu,
+                "state": "Remote" if rng.random() < 0.12 else str(rng.choice(STATES)),
+            }
         )
     cands = []
     for c in range(n_cands):
@@ -78,15 +78,15 @@ def generate(n_jobs=1500, n_cands=4000, seed=7):
         skills |= {s for s in ["communication", "teamwork", "problem_solving"] if rng.random() < 0.3}
         floor = EDU_LEVELS.index(medu if medu in EDU_LEVELS else "tvet")
         cands.append(
-            dict(
-                candidate_id=f"C{c:04d}",
-                background=r,
-                skills=sorted(skills),
-                years_experience=int(rng.integers(0, 6)),
-                education=EDU_LEVELS[int(np.clip(floor + rng.integers(-1, 2), 0, 4))],
-                state=str(rng.choice(STATES)),
-                signup_day=int(rng.integers(0, 60)),
-            )
+            {
+                "candidate_id": f"C{c:04d}",
+                "background": r,
+                "skills": sorted(skills),
+                "years_experience": int(rng.integers(0, 6)),
+                "education": EDU_LEVELS[int(np.clip(floor + rng.integers(-1, 2), 0, 4))],
+                "state": str(rng.choice(STATES)),
+                "signup_day": int(rng.integers(0, 60)),
+            }
         )
     by_title = {}
     for job in jobs:

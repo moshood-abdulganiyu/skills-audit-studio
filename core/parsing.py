@@ -98,8 +98,8 @@ def find_education(text, pick="max"):
         return None
     return (max if pick == "max" else min)(levels, key=lambda level: EDU[level])
 
-_RANGE = re.compile(r"((?:19|20)\d{2})\s*(?:-|–|—|to)\s*((?:19|20)\d{2}|present|current|date|now)", re.I)
-_YEARS_STATED = re.compile(r"(\d{1,2})\s*\+?\s*(?:years?|yrs?)\s+(?:of\s+)?(?:\w+\s+){0,2}experience", re.I)
+_RANGE = re.compile(r"((?:19|20)\d{2})\s*(?:-|–|—|to)\s*((?:19|20)\d{2}|present|current|date|now)", re.IGNORECASE)
+_YEARS_STATED = re.compile(r"(\d{1,2})\s*\+?\s*(?:years?|yrs?)\s+(?:of\s+)?(?:\w+\s+){0,2}experience", re.IGNORECASE)
 
 
 def years_from_ranges(text, current_year=None):
@@ -166,25 +166,25 @@ def parse_job(text):
         for line in lines:
             if find_education(line):                # 'Degree in Statistics' is a qualification, not a skill
                 continue
-            line_bucket = optional if re.search(r"nice to have|preferred|is a plus|an advantage|desirable|bonus", line, re.I) else bucket
+            line_bucket = optional if re.search(r"nice to have|preferred|is a plus|an advantage|desirable|bonus", line, re.IGNORECASE) else bucket
             for s, p in find_skills(line).items():
                 line_bucket.setdefault(s, p)
     if not core:                                    # no clear 'Requirements' section: treat everything as core
         core, other = {**other, **core}, {}
     optional = {s: p for s, p in {**other, **optional}.items() if s not in core}
 
-    m = re.search(r"^[ \t]*(?:job title|position|role)[ \t]*[:\-][ \t]*(.+)", text, re.I | re.M)
+    m = re.search(r"^[ \t]*(?:job title|position|role)[ \t]*[:\-][ \t]*(.+)", text, re.IGNORECASE | re.MULTILINE)
     title = (m.group(1) if m else next(line for line in text.splitlines() if line.strip())).strip()[:80]
     req_text = "\n".join(
         line for h, ls in sections if re.search(r"require|qualif|must|essential|need|who you are", h) for line in ls
     ) or text
-    yrs = re.search(r"(\d{1,2})\s*\+?\s*(?:-|–|to)?\s*(?:\d{1,2})?\s*\+?\s*(?:years?|yrs?)", req_text, re.I)
+    yrs = re.search(r"(\d{1,2})\s*\+?\s*(?:-|–|to)?\s*(?:\d{1,2})?\s*\+?\s*(?:years?|yrs?)", req_text, re.IGNORECASE)
     edu = find_education(req_text, "min") or find_education(text, "min")
-    remote = re.search(r"\bremote\b", text, re.I) and not re.search(r"not remote|no remote", text, re.I)
+    remote = re.search(r"\bremote\b", text, re.IGNORECASE) and not re.search(r"not remote|no remote", text, re.IGNORECASE)
     loc_line = (
         "\n".join(line for h, ls in sections for line in ls if "location" in h)
         + "\n"
-        + "\n".join(line for line in text.splitlines() if re.search(r"location|based in", line, re.I))
+        + "\n".join(line for line in text.splitlines() if re.search(r"location|based in", line, re.IGNORECASE))
     )
     state = find_state(loc_line) or find_state(text)
     return {"title": title, "core_skills": sorted(core), "optional_skills": sorted(optional),
