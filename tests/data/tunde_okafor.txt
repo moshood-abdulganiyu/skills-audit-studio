@@ -1,0 +1,15 @@
+Tunde Okafor
+Abuja, FCT
+
+Profile
+Junior data scientist, 2 years experience building predictive models.
+
+Experience
+Data Scientist Intern, FinServe Ltd | 2024 - Present
+Analytics Assistant, GovTech Lab | 2023 - 2024
+
+Education
+M.Sc. Statistics, University of Ibadan
+
+Skills
+Python, pandas, scikit-learn, SQL, Statistics, Power BI, Data analysis, Teamwork

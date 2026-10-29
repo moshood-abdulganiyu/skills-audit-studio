@@ -1,0 +1,18 @@
+Data Analyst - Youth Employment Programme
+Location: Lagos (hybrid)
+
+About the role
+You will analyse programme data on young people's training and job outcomes and turn it into insight for partners.
+
+Requirements
+- Bachelor's degree or HND in Statistics, Economics, Computer Science or related field
+- 2+ years of experience in a data role
+- Strong SQL and Microsoft Excel (pivot tables, lookups)
+- Data analysis of survey and administrative data
+- Python (pandas) for data cleaning
+
+Nice to have
+- Power BI dashboards
+- Statistics (regression, sampling)
+- Monitoring and evaluation experience
+- Excellent communication and report writing

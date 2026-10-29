@@ -1,0 +1,18 @@
+Amina Bello
+Ikeja, Lagos | amina.bello@email.com
+
+Summary
+Data analyst with 3 years of experience turning survey data into dashboards for NGOs.
+
+Work Experience
+Data Analyst, Lagos Skills Hub | 2023 - Present
+- Analysed survey data for 12,000 trainees using MySQL and MS Excel pivot tables
+- Built Tableau dashboards for partner reporting
+Data Officer, Bright Futures NGO | 2021 - 2023
+- Collected field data with Kobo Toolbox; wrote monthly M&E reports
+
+Education
+B.Sc. Economics, University of Lagos, 2020
+
+Skills
+MS Excel, MySQL, Tableau, Kobo Toolbox, Report writing, Communication, Prompt engineering
