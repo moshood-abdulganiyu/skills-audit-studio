@@ -9,5 +9,39 @@ description = "Resume skills audit: a versioned ML service (FastAPI) and web app
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-dependencies = []
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "joblib",
+    "pypdf",
+    "python-docx",
+]
 
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+]
+notebook = [
+    "ipykernel",
+    "ipywidgets",
+    "matplotlib",
+    "reportlab",
+    "fastapi",
+    "uvicorn",
+    "httpx",
+]
+
+# Only `core` is an installable package. Listing it explicitly stops setuptools from
+# trying to auto-discover training/, api/, models/ ... as packages (it refuses to guess
+# when a flat layout has several top-level folders).
+[tool.setuptools]
+packages = ["core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["notebooks"]
